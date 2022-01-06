@@ -3,7 +3,7 @@ import java.util.*;
 /**
  * A class for the user's character that they will control in the overworld
  * 
- * @author Isaac Chan, Kenneth Li, Vincent Hsieh 
+ * @author Vincent Hsieh 
  * @version 1.0
  */
 public class Player extends Actor  
