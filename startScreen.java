@@ -20,7 +20,7 @@ public class startScreen extends World
         setBackground("startImage.jpeg");
         Greenfoot.start();
         
-        
+        //adds labels for the startscreen
         addObject(titleLabel, getWidth()/2, getHeight()/3);
         addObject(startLabel, getWidth()/2, (getHeight()/3)*2);
     }
@@ -28,8 +28,8 @@ public class startScreen extends World
     {
         //Start game if space bar is pressed
         if ("enter".equals(Greenfoot.getKey())){
-            gameMap gameWorld = new gameMap();
-            
+            instructionsScreen gameWorld = new instructionsScreen();
+            //change worlds
             Greenfoot.setWorld(gameWorld);
         }
     }
