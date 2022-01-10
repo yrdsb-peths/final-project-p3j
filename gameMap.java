@@ -18,6 +18,7 @@ public class gameMap extends World
     int score = 0;
     public Player mainPlayer = new Player();
     
+    Score scoreCounter = new Score();
     public Player getPlayer()
     {
         return mainPlayer;
@@ -29,6 +30,7 @@ public class gameMap extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(900, 600, 1); 
         mainPlayer = new Player();
+        addObject(scoreCounter, 130, 75);
         addObject(mainPlayer, getWidth()/2, getHeight()/2);
     }
 }

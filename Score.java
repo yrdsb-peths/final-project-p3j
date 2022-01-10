@@ -17,12 +17,12 @@ public class Score extends Actor
     
     public Score()
     {
-       setImage(new GreenfootImage("Score: " + score, 40 ,Color.BLACK,new Color (0,0,0,0)));
+       setImage(new GreenfootImage("Score: " + score, 25 ,Color.BLACK,new Color (0,0,0,0)));
         
     }
      public void act() 
     {
         
-        setImage(new GreenfootImage("Score: " + score, 40 , Color.BLACK,new Color (0,0,0,0)));
+        setImage(new GreenfootImage("Score: " + score, 25 , Color.BLACK,new Color (0,0,0,0)));
     }    
 }
