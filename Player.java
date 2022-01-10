@@ -4,18 +4,16 @@ import java.util.*;
  * A class for the user's character that they will control in the overworld
  * 
  * @author Vincent Hsieh 
- * @version 1.0
+ * @version 1.1
  */
 public class Player extends Actor  
 {
-    int moveX;
-    int moveY;
     public Player(){
         setImage("trainer(initial).png"); // The initial sprite of the character
     }
     public void act(){ // Act cycle
         MovementControl(); // Allows movement/controls movement
-        Aimer();
+        //Aimer();
         fireProjectile();
         
     }
@@ -24,7 +22,6 @@ public class Player extends Actor
     public void MovementControl(){
         // booleans that store current movement state
         boolean up = false, down = false, left = false, right = false;
-        
         // if statements to determine current movement state
         if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w"))up=true;
         if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s"))down=true;
@@ -102,27 +99,28 @@ public class Player extends Actor
     public int clamp(int v,int min,int max){
         return Math.max(min,Math.min(max,v));
     }
-    private class Animation_Table{
+    private static class Animation_Table{
         //            tot_frame  cur_frame
-        int[][] table = {{2,       0}, //up
+        static int[][] table = {{2,       0}, //up
                          {2,       0}, //down
                          {2,       0}, //left
                          {2,       0}};//right
-        public int[] get(String dir){ // returns specific values of the animation table
+        public static int[] get(String dir){ // returns specific values of the animation table
             if(dir=="up")return table[0];
             else if(dir=="down")return table[1];
             else if(dir=="left")return table[2];
             else if(dir=="right")return table[3];
             int[]tmp={-1,-1};return tmp;
         }
-        public void set(String dir, int[] tab){ // sets specific values of the animation table
+        /*is this even useful?
+        public static void set(String dir, int[] tab){ // sets specific values of the animation table
             if(dir=="up")table[0]=tab;
             else if(dir=="down")table[1]=tab;
             else if(dir=="left")table[2]=tab;
             else if(dir=="right")table[3]=tab;
         }
+        */
     }
-    private Animation_Table anim_tab = new Animation_Table();
     private SimpleTimer timer = new SimpleTimer();
     int dt;
     int time=0;
@@ -130,7 +128,7 @@ public class Player extends Actor
         String cur_frame_name="trainer("+direction+")";
         dt=timer.millisElapsed();
         time+=dt;
-        int[]temp=anim_tab.get(direction);
+        int[]temp=Animation_Table.get(direction);
         if(time > 500){
             time-=500;
             temp[1]+=1;
@@ -142,19 +140,16 @@ public class Player extends Actor
         setImage(cur_frame_name);
         timer.mark();
     }
-    public void fireProjectile()
-    {
+    public void fireProjectile(){
         if(Greenfoot.mousePressed(null)){
             Projectile projectile = new Projectile();
             getWorld().addObject(projectile, getX(), getY());
-            projectile.setRotation(getRotation());
+            projectile.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
             projectile.move(25);
         }
-
     }
-    public void Aimer()
-    {
-        if(Greenfoot.getMouseInfo() != null)
+    /*public void Aimer(){
+        if(Greenfoot.getMouseInfo() != null) //what is this for?
         turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());
-    }
+    }*/
 }
