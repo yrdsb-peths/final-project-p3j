@@ -15,6 +15,8 @@ public class Player extends Actor
     }
     public void act(){ // Act cycle
         MovementControl(); // Allows movement/controls movement
+        Aimer();
+        fireProjectile();
         
     }
     
@@ -139,5 +141,20 @@ public class Player extends Actor
         cur_frame_name+=temp[1]+".png";
         setImage(cur_frame_name);
         timer.mark();
+    }
+    public void fireProjectile()
+    {
+        if(Greenfoot.mousePressed(null)){
+            Projectile projectile = new Projectile();
+            getWorld().addObject(projectile, getX(), getY());
+            projectile.setRotation(getRotation());
+            projectile.move(25);
+        }
+
+    }
+    public void Aimer()
+    {
+        if(Greenfoot.getMouseInfo() != null)
+        turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());
     }
 }
