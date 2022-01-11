@@ -1,27 +1,37 @@
 import greenfoot.*;
-import java.util.*;
+
 /**
  * A class for the user's character that they will control in the overworld
  * 
  * @author Vincent Hsieh 
- * @version 1.1
+ * @version 1/11 0.4
  */
 public class Player extends Actor  
 {
-    public Player(){
+    HealthBar healthbar;
+    public Player(World w){
         setImage("trainer(initial).png"); // The initial sprite of the character
+        healthbar = new HealthBar(this);
+        //getWorld is invalid untill the construction of the world is OVER
+        //pass down a world class to get around it
+        w.addObject(healthbar, 0, 0);
     }
-    public void act(){ // Act cycle
+    /**
+     * Act is called whenever the 'Act' button gets pressed.
+     * or every tick whenever the 'Run' button gets pressed.
+     */
+    public void act(){
         MovementControl(); // Allows movement/controls movement
-        //Aimer();
-        fireProjectile();
-        
+        //need to figure out a way to allow us to just hold the mouse
+        if(Greenfoot.mousePressed(null)){
+            fireProjectile();
+        }
     }
     
     // Main method to allow movement
     public void MovementControl(){
         // booleans that store current movement state
-        boolean up = false, down = false, left = false, right = false;
+        boolean up=false,down=false,left=false,right=false;
         // if statements to determine current movement state
         if(Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w"))up=true;
         if(Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s"))down=true;
@@ -94,32 +104,23 @@ public class Player extends Actor
     public void Move(int x, int y){
         setLocation(getX()+x, getY()+y);
     }
-    
     //clamp value between min and max
-    public int clamp(int v,int min,int max){
+    public int clamp(int v,int min,int max){ //this is not even used my god
         return Math.max(min,Math.min(max,v));
     }
     private static class Animation_Table{
-        //            tot_frame  cur_frame
-        static int[][] table = {{2,       0}, //up
-                         {2,       0}, //down
-                         {2,       0}, //left
-                         {2,       0}};//right
+        //               tot_frame  cur_frame
+        static int[][]table={{2,       0}, //up
+                             {2,       0}, //down
+                             {2,       0}, //left
+                             {2,       0}};//right
         public static int[] get(String dir){ // returns specific values of the animation table
             if(dir=="up")return table[0];
             else if(dir=="down")return table[1];
             else if(dir=="left")return table[2];
             else if(dir=="right")return table[3];
-            int[]tmp={-1,-1};return tmp;
+            return null;
         }
-        /*is this even useful?
-        public static void set(String dir, int[] tab){ // sets specific values of the animation table
-            if(dir=="up")table[0]=tab;
-            else if(dir=="down")table[1]=tab;
-            else if(dir=="left")table[2]=tab;
-            else if(dir=="right")table[3]=tab;
-        }
-        */
     }
     private SimpleTimer timer = new SimpleTimer();
     int dt;
@@ -140,16 +141,11 @@ public class Player extends Actor
         setImage(cur_frame_name);
         timer.mark();
     }
+    
     public void fireProjectile(){
-        if(Greenfoot.mousePressed(null)){
-            Projectile projectile = new Projectile();
-            getWorld().addObject(projectile, getX(), getY());
-            projectile.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
-            projectile.move(25);
-        }
+        Projectile projectile = new Projectile();
+        getWorld().addObject(projectile, getX(), getY());
+        projectile.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
+        projectile.move(25);
     }
-    /*public void Aimer(){
-        if(Greenfoot.getMouseInfo() != null) //what is this for?
-        turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());
-    }*/
 }

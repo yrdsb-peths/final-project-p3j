@@ -1,10 +1,11 @@
 #BlueJ class context
 comment0.target=Player
-comment0.text=\r\n\ A\ class\ for\ the\ user's\ character\ that\ they\ will\ control\ in\ the\ overworld\r\n\ \r\n\ @author\ Vincent\ Hsieh\ \r\n\ @version\ 1.1\r\n
-comment1.params=
-comment1.target=Player()
+comment0.text=\r\n\ A\ class\ for\ the\ user's\ character\ that\ they\ will\ control\ in\ the\ overworld\r\n\ \r\n\ @author\ Vincent\ Hsieh\ \r\n\ @version\ 1/11\ 0.4\r\n
+comment1.params=w
+comment1.target=Player(greenfoot.World)
 comment2.params=
 comment2.target=void\ act()
+comment2.text=\r\n\ Act\ is\ called\ whenever\ the\ 'Act'\ button\ gets\ pressed.\r\n\ or\ every\ tick\ whenever\ the\ 'Run'\ button\ gets\ pressed.\r\n
 comment3.params=
 comment3.target=void\ MovementControl()
 comment4.params=x\ y

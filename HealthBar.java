@@ -4,48 +4,61 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Write a description of class HealthBar here.
  * 
  * @author (your name) 
- * @version (a version number or a date)
+ * @version 1/11 0.3
  */
 public class HealthBar extends Actor
 {
-    /**
-     * Act - do whatever the HealthBar wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    int health = 50;
+    private double health;
+    private double last_health;
+    private Actor entity;
     //HealthBar Visuals
-    public HealthBar()
-    {
-        setImage(new GreenfootImage(52, 12));
-        getImage().drawRect(0,0,51,11);
-        getImage().setColor(Color.RED);
-        getImage().fillRect(1,1,health,10);
-        
+    public HealthBar(Actor e){
+        entity = e;
+        health = 1;
     }
-    public void act() 
-    {
-        setImage(new GreenfootImage(52, 12));
-        getImage().drawRect(0,0,51,11);
-        getImage().setColor(Color.RED);
-        getImage().fillRect(1,1,health,10);
+    /**
+     * Act is called whenever the 'Act' button gets pressed.
+     * or every tick whenever the 'Run' button gets pressed.
+     */
+    public void act(){
+        update_bar();
+    }
+    public void setHealth(double n){
+        health = n;
+    }
+    private void update_bar(){
+        if(last_health!=health){
+            last_health = health;
+            
+            GreenfootImage h_bar = new GreenfootImage(52, 12);
+            h_bar.fillRect(0,0,52,12);
+            Color health_color = new Color((int)Math.round(255.0*(1.0-health)),(int)Math.round(255.0*(health)),0);
+            h_bar.setColor(health_color);
+            h_bar.fillRect(1,1,(int)Math.round(health*50.0),10);
+    
+            setImage(h_bar);
+        }
+        //clip prevention
+        int x = entity.getX();
+        int y = entity.getY()-35;
+        if(y<=0){
+            y = entity.getY()+entity.getImage().getHeight()-10;
+        }
+        setLocation(x, y);
+    }
+
+    //Method for losing Health
+    /*
+    public void loseHealth(){
         World world = getWorld();
         gameMap myWorld = (gameMap)world;
-        setLocation(myWorld.getPlayer().getX() - 1, myWorld.getPlayer().getY()-35);
-        //loseHealth();
-    } 
-    //Method for losing Health
-    // public void loseHealth()
-    // {
-        // World world = getWorld();
-        // gameMap myWorld = (gameMap)world;
-        // if(myWorld.getPlayer().hitByMonster_Basic())
-        // {
-            // health--;
-        // }
-        // if(health<=0)
-        // {
-        // getWorld().showText("You Lose! \n You Survived For " + (myWorld.getPlayer().time/60) + " seconds", getWorld().getWidth()/2, getWorld().getHeight()/2);
-        // Greenfoot.stop();
-        // }
-    // }
+        if(myWorld.getPlayer().hitByMonster_Basic()){
+            health--;
+        }
+        if(health<=0){
+        getWorld().showText("You Lose! \n You Survived For " + (myWorld.getPlayer().time/60) + " seconds", getWorld().getWidth()/2, getWorld().getHeight()/2);
+        Greenfoot.stop();
+        }
+    }
+    */
 }

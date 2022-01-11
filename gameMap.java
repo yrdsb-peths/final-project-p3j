@@ -1,28 +1,25 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.*;
+
 /**
  * Write a description of class GameWorld here.
  * 
  * @author (your name) 
- * @version (a version number or a date)
+ * @version 0.4
  */
 public class gameMap extends World{
     /**
      * Constructor for objects of class GameWorld.
      * 
      */
-    public Player player = new Player();
+    public Player player = new Player(this);
     Score scoreCounter = new Score();
-    HealthBar healthbar = new HealthBar();
     public gameMap(){    
         super(900, 600, 1); 
         
         addObject(player, getWidth()/2, getHeight()/2);
         addObject(scoreCounter, 130, 100);
-        addObject(healthbar, player.getX() - 5, player.getY() - 5);
     }
-    public Player getPlayer()
-    {
+    public Player getPlayer(){
         return player;
     }
     
@@ -36,7 +33,7 @@ public class gameMap extends World{
         //why the hell am i doing this garbage, this can be done in a goddanm
         //for loop, yet we going reursive for it, bruh
         if(times<=0) return;
-        Monster_Basic mob = new Monster_Basic();
+        Monster_Basic mob = new Monster_Basic(this);
         addObject(mob, Greenfoot.getRandomNumber(900), Greenfoot.getRandomNumber(600));
         
         recursive_mod_spawn(times-1);
