@@ -11,12 +11,21 @@ public class gameMap extends World{
      * Constructor for objects of class GameWorld.
      * 
      */
+    public Player player = new Player();
+    Score scoreCounter = new Score();
+    HealthBar healthbar = new HealthBar();
     public gameMap(){    
         super(900, 600, 1); 
-        Player player = new Player();
-        addObject(player, getWidth()/2, getHeight()/2);
         
+        addObject(player, getWidth()/2, getHeight()/2);
+        addObject(scoreCounter, 130, 100);
+        addObject(healthbar, player.getX() - 5, player.getY() - 5);
     }
+    public Player getPlayer()
+    {
+        return player;
+    }
+    
     public void act(){
         if (Greenfoot.isKeyDown("e")){
             //change worlds
