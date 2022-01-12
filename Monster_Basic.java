@@ -30,6 +30,7 @@ public class Monster_Basic extends Enemy
             getWorld().removeObject(getOneIntersectingObject(Projectile.class));
             if(health<=0){
                 Score.score++;
+                Money.money++;
                 getWorld().removeObject(healthbar);
                 getWorld().removeObject(this);
             }

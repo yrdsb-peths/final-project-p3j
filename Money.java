@@ -6,24 +6,24 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version 1/11 0.12
  */
-public class Score extends Actor
+public class Money extends Actor
 {
     /**
      * Act - do whatever the Score wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    // this needs to be static
-    public static int score;
-    private Color transparent = new Color(0,0,0,0);
+   
     public static int money;
-    public Score(){
+    private Color transparent = new Color(0,0,0,0);
+    
+    public Money(){
         update();
     }
     public void act(){
         update();
-    }      
+    }
+    
     public void update(){
-        setImage(new GreenfootImage("Score: "+score,40,Color.BLACK,transparent));
-        
+        setImage(new GreenfootImage("Cash: $"+money,40,Color.BLACK,transparent));  
     }      
 }

@@ -13,11 +13,13 @@ public class gameMap extends World{
      */
     public Player player = new Player(this);
     Score scoreCounter = new Score();
+    Money cash = new Money();
     public gameMap(){    
         super(900, 600, 1); 
         
         addObject(player, getWidth()/2, getHeight()/2);
-        addObject(scoreCounter, 130, 100);
+        addObject(scoreCounter, 130, 95);
+        addObject(cash, 145, 130);
     }
     public Player getPlayer(){
         return player;
@@ -29,6 +31,7 @@ public class gameMap extends World{
             recursive_mod_spawn(Integer.parseInt(Greenfoot.ask("how many")));
         }
     }
+    
     public void recursive_mod_spawn(int times){
         //why the hell am i doing this garbage, this can be done in a goddanm
         //for loop, yet we going reursive for it, bruh
