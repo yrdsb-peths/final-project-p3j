@@ -9,12 +9,22 @@ import greenfoot.*;
 public class Player extends Actor  
 {
     HealthBar healthbar;
+    WeaponButton weaponButton;
     public Player(World w){
         setImage("trainer(initial).png"); // The initial sprite of the character
         healthbar = new HealthBar(this);
+        
         //getWorld is invalid untill the construction of the world is OVER
         //pass down a world class to get around it
         w.addObject(healthbar, 0, 0);
+        w.addObject(weaponButton,0, 0); 
+    }
+    public Player(WeaponButton weaponbutton)
+    {
+        this.weaponButton = weaponButton;
+        getImage().setColor(Color.BLACK);
+        getImage().fillRect(50, 20, 70, 10);
+    
     }
     /**
      * Act is called whenever the 'Act' button gets pressed.
@@ -143,9 +153,35 @@ public class Player extends Actor
     }
     
     public void fireProjectile(){
-        Projectile projectile = new Projectile();
-        getWorld().addObject(projectile, getX(), getY());
-        projectile.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
-        projectile.move(25);
+        if(Greenfoot.mousePressed(null) && weaponButton.weaponUpgrade == 1){
+            Projectile projectile = new Projectile();
+            getWorld().addObject(projectile, getX(), getY());
+            projectile.setRotation(getRotation());
+            projectile.move(25);
+        }
+        if(Greenfoot.mousePressed(null) && weaponButton.weaponUpgrade == 2){
+            Projectile projectile = new Projectile();
+            getWorld().addObject(projectile, getX(), getY());
+            projectile.setRotation(getRotation() - 10);
+            projectile.move(20);
+             Projectile projectile2 = new Projectile();
+            getWorld().addObject(projectile2, getX(), getY());
+            projectile2.setRotation(getRotation() + 10);
+            projectile2.move(20);
+        }
+        if(Greenfoot.mousePressed(null) && weaponButton.weaponUpgrade == 3){
+            Projectile projectile = new Projectile();
+            getWorld().addObject(projectile, getX(), getY());
+            projectile.setRotation(getRotation() - 10);
+            projectile.move(20);
+            Projectile projectile2 = new Projectile();
+            getWorld().addObject(projectile2, getX(), getY());
+            projectile2.setRotation(getRotation() + 10);
+            projectile2.move(20);
+            Projectile projectile3 = new Projectile();
+            getWorld().addObject(projectile3, getX(), getY());
+            projectile3.setRotation(getRotation());
+            projectile3.move(20);
+        }
     }
 }

@@ -13,13 +13,15 @@ public class gameMap extends World{
      */
     public Player player = new Player(this);
     Score scoreCounter = new Score();
+    WeaponButton weaponButton = new WeaponButton(scoreCounter);
     Money cash = new Money();
     public gameMap(){    
         super(900, 600, 1); 
-        
+        player = new Player(weaponButton);
         addObject(player, getWidth()/2, getHeight()/2);
         addObject(scoreCounter, 130, 95);
         addObject(cash, 145, 130);
+        addObject(weaponButton, 900, 100);
     }
     public Player getPlayer(){
         return player;
