@@ -4,69 +4,45 @@ import greenfoot.*;
  * A class for the user's character that they will control in the overworld
  * 
  * @author Vincent Hsieh 
- * @version 1/11 0.4
+ * @version 1/14 0.55
  */
-public class Player extends Actor  
-{
+public class Player extends Actor{
     HealthBar healthbar;
+    World world;
+    
+    private SimpleTimer fire_timer = new SimpleTimer();
+    private double fire_CD = 0.1;
+    private double cur_CD = 0;
     public Player(){
         setImage("trainer(initial).png"); // The initial sprite of the character
     }
     public void addedToWorld(World w){
         //a World is pass down from this function addedToWorld
         healthbar = new HealthBar(this);
-        w.addObject(healthbar, 0, 0);
+        world = w;
+        world.addObject(healthbar, 0, 0);
     }
-    /**
-     * Act is called whenever the 'Act' button gets pressed.
-     * or every tick whenever the 'Run' button gets pressed.
-     */
     public void act(){
         MovementControl(); // Allows movement/controls movement
-        //need to figure out a way to allow us to just hold the mouse
-        if(Greenfoot.mousePressed(null)){
-            fireProjectile();
+        
+        //still need to figure out a way to allow us to just hold the mouse
+        if(Greenfoot.mousePressed(null) || Greenfoot.isKeyDown("space")){
+            if(cur_CD <= 0){
+                cur_CD = fire_CD;
+                fireProjectile();
+            }
         }
+        cur_CD -= (double)fire_timer.millisElapsed()/1000;
+        fire_timer.mark();
     }
     public void fireProjectile(){
-        if(Greenfoot.mousePressed(null) && WeaponButton.weaponUpgrade == 1){
+        int initial_rot = (WeaponButton.weaponUpgrade-1)*5;
+        for(int i=0; i<WeaponButton.weaponUpgrade; i++){
             Projectile projectile = new Projectile();
-            getWorld().addObject(projectile, getX(), getY());
-            projectile.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
-            //projectile.setRotation(getRotation());
+            world.addObject(projectile, getX(), getY());
+            projectile.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());
+            projectile.setRotation(projectile.getRotation() - initial_rot + (10*i));
             projectile.move(20);
-        }
-        if(Greenfoot.mousePressed(null) && WeaponButton.weaponUpgrade == 2){
-            Projectile projectile = new Projectile();
-            getWorld().addObject(projectile, getX(), getY());
-            projectile.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
-            projectile.setRotation(getRotation() - 5);
-            projectile.move(20);
-            
-            Projectile projectile2 = new Projectile();
-            getWorld().addObject(projectile2, getX(), getY());
-            projectile2.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
-            projectile2.setRotation(getRotation() + 5);
-            projectile2.move(20);
-        }
-        if(Greenfoot.mousePressed(null) && WeaponButton.weaponUpgrade == 3){
-            Projectile projectile = new Projectile();
-            getWorld().addObject(projectile, getX(), getY());
-            projectile.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
-            projectile.setRotation(getRotation() - 10);
-            projectile.move(20);
-            
-            Projectile projectile2 = new Projectile();
-            getWorld().addObject(projectile2, getX(), getY());
-            projectile2.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
-            projectile2.setRotation(getRotation());
-            projectile2.move(20);
-            
-            Projectile projectile3 = new Projectile();
-            getWorld().addObject(projectile3, getX(), getY());
-            projectile3.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
-            projectile3.setRotation(getRotation() + 10);
-            projectile3.move(20);
         }
     }
     

@@ -4,7 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Write a description of class GameWorld here.
  * 
  * @author (your name) 
- * @version 0.4
+ * @version 1/14 0.5
  */
 public class gameMap extends World{
     /**
@@ -32,7 +32,6 @@ public class gameMap extends World{
             recursive_mod_spawn(Integer.parseInt(Greenfoot.ask("how many")));
         }
     }
-    
     public void recursive_mod_spawn(int times){
         //why the hell am i doing this garbage, this can be done in a goddanm
         //for loop, yet we going reursive for it, bruh

@@ -4,10 +4,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Write a description of class HealthBar here.
  * 
  * @author (your name) 
- * @version 1/11 0.3
+ * @version 1/14 0.4
  */
-public class HealthBar extends Actor
-{
+public class HealthBar extends Actor{
     private double health;
     private double last_health;
     private Actor entity;
@@ -34,11 +33,6 @@ public class HealthBar extends Actor
     
             setImage(h_bar);
         }
-        /*
-        if(entity.isLegal()){
-            
-        }
-        */
         //clip prevention
         int x = entity.getX();
         int y = entity.getY()-35;

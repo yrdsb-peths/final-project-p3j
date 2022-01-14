@@ -4,26 +4,28 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Write a description of class Projectile here.
  * 
  * @author (your name) 
- * @version (a version number or a date)
+ * @version 1/14 0.15
  */
-public class Projectile extends Actor
-{
-    /**
-     * Act - do whatever the Projectile wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public Projectile()
-    {
-        setImage(new GreenfootImage(10, 2));
-        getImage().setColor(Color.RED);
-        getImage().fillRect(0,0,10,2);
+public class Projectile extends Actor{
+    GreenfootImage img;
+    World world;
+    public Projectile(){
+        update();
     }
-    public void act() 
-    {
+    public void addedToWorld(World w){
+        //a World is pass down from this function addedToWorld
+        world = w;
+    }
+    public void act(){
         move(10);
-        if(isAtEdge())
-        {
-            getWorld().removeObject(this);
+        if(isAtEdge()){
+            world.removeObject(this);
         }
     }    
+    public void update(){
+        img = new GreenfootImage(10, 2);
+        img.setColor(Color.RED);
+        img.fillRect(0,0,10,2);
+        setImage(img);
+    }      
 }
