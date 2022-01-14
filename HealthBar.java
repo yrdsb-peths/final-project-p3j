@@ -16,10 +16,6 @@ public class HealthBar extends Actor
         entity = e;
         health = 1;
     }
-    /**
-     * Act is called whenever the 'Act' button gets pressed.
-     * or every tick whenever the 'Run' button gets pressed.
-     */
     public void act(){
         update_bar();
     }
@@ -38,6 +34,11 @@ public class HealthBar extends Actor
     
             setImage(h_bar);
         }
+        /*
+        if(entity.isLegal()){
+            
+        }
+        */
         //clip prevention
         int x = entity.getX();
         int y = entity.getY()-35;

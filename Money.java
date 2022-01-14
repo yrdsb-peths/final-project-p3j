@@ -12,7 +12,6 @@ public class Money extends Actor
      * Act - do whatever the Score wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-   
     public static int money;
     private Color transparent = new Color(0,0,0,0);
     
@@ -24,6 +23,6 @@ public class Money extends Actor
     }
     
     public void update(){
-        setImage(new GreenfootImage("Cash: $"+money,40,Color.BLACK,transparent));  
+        setImage(new GreenfootImage("$"+money,40,Color.BLACK,transparent));  
     }      
 }

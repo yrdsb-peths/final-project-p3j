@@ -24,6 +24,5 @@ public class Score extends Actor
     }      
     public void update(){
         setImage(new GreenfootImage("Score: "+score,40,Color.BLACK,transparent));
-        
     }      
 }

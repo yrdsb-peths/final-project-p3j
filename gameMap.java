@@ -11,17 +11,17 @@ public class gameMap extends World{
      * Constructor for objects of class GameWorld.
      * 
      */
-    public Player player = new Player(this);
+    public Player player;
     Score scoreCounter = new Score();
-    WeaponButton weaponButton = new WeaponButton(scoreCounter);
+    WeaponButton weaponButton = new WeaponButton();
     Money cash = new Money();
     public gameMap(){    
         super(900, 600, 1); 
-        player = new Player(weaponButton);
+        player = new Player();
         addObject(player, getWidth()/2, getHeight()/2);
-        addObject(scoreCounter, 130, 95);
-        addObject(cash, 145, 130);
-        addObject(weaponButton, 900, 100);
+        addObject(scoreCounter, 100, 30);
+        addObject(cash, 800, 30);
+        addObject(weaponButton, 800, 100);
     }
     public Player getPlayer(){
         return player;
@@ -29,7 +29,6 @@ public class gameMap extends World{
     
     public void act(){
         if (Greenfoot.isKeyDown("e")){
-            //change worlds
             recursive_mod_spawn(Integer.parseInt(Greenfoot.ask("how many")));
         }
     }
@@ -38,7 +37,7 @@ public class gameMap extends World{
         //why the hell am i doing this garbage, this can be done in a goddanm
         //for loop, yet we going reursive for it, bruh
         if(times<=0) return;
-        Monster_Basic mob = new Monster_Basic(this);
+        Monster_Basic mob = new Monster_Basic();
         addObject(mob, Greenfoot.getRandomNumber(900), Greenfoot.getRandomNumber(600));
         
         recursive_mod_spawn(times-1);

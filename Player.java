@@ -9,22 +9,13 @@ import greenfoot.*;
 public class Player extends Actor  
 {
     HealthBar healthbar;
-    WeaponButton weaponButton;
-    public Player(World w){
+    public Player(){
         setImage("trainer(initial).png"); // The initial sprite of the character
-        healthbar = new HealthBar(this);
-        
-        //getWorld is invalid untill the construction of the world is OVER
-        //pass down a world class to get around it
-        w.addObject(healthbar, 0, 0);
-        w.addObject(weaponButton,0, 0); 
     }
-    public Player(WeaponButton weaponbutton)
-    {
-        this.weaponButton = weaponButton;
-        getImage().setColor(Color.BLACK);
-        getImage().fillRect(50, 20, 70, 10);
-    
+    public void addedToWorld(World w){
+        //a World is pass down from this function addedToWorld
+        healthbar = new HealthBar(this);
+        w.addObject(healthbar, 0, 0);
     }
     /**
      * Act is called whenever the 'Act' button gets pressed.
@@ -35,6 +26,47 @@ public class Player extends Actor
         //need to figure out a way to allow us to just hold the mouse
         if(Greenfoot.mousePressed(null)){
             fireProjectile();
+        }
+    }
+    public void fireProjectile(){
+        if(Greenfoot.mousePressed(null) && WeaponButton.weaponUpgrade == 1){
+            Projectile projectile = new Projectile();
+            getWorld().addObject(projectile, getX(), getY());
+            projectile.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
+            //projectile.setRotation(getRotation());
+            projectile.move(20);
+        }
+        if(Greenfoot.mousePressed(null) && WeaponButton.weaponUpgrade == 2){
+            Projectile projectile = new Projectile();
+            getWorld().addObject(projectile, getX(), getY());
+            projectile.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
+            projectile.setRotation(getRotation() - 5);
+            projectile.move(20);
+            
+            Projectile projectile2 = new Projectile();
+            getWorld().addObject(projectile2, getX(), getY());
+            projectile2.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
+            projectile2.setRotation(getRotation() + 5);
+            projectile2.move(20);
+        }
+        if(Greenfoot.mousePressed(null) && WeaponButton.weaponUpgrade == 3){
+            Projectile projectile = new Projectile();
+            getWorld().addObject(projectile, getX(), getY());
+            projectile.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
+            projectile.setRotation(getRotation() - 10);
+            projectile.move(20);
+            
+            Projectile projectile2 = new Projectile();
+            getWorld().addObject(projectile2, getX(), getY());
+            projectile2.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
+            projectile2.setRotation(getRotation());
+            projectile2.move(20);
+            
+            Projectile projectile3 = new Projectile();
+            getWorld().addObject(projectile3, getX(), getY());
+            projectile3.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());;
+            projectile3.setRotation(getRotation() + 10);
+            projectile3.move(20);
         }
     }
     
@@ -150,38 +182,5 @@ public class Player extends Actor
         cur_frame_name+=temp[1]+".png";
         setImage(cur_frame_name);
         timer.mark();
-    }
-    
-    public void fireProjectile(){
-        if(Greenfoot.mousePressed(null) && weaponButton.weaponUpgrade == 1){
-            Projectile projectile = new Projectile();
-            getWorld().addObject(projectile, getX(), getY());
-            projectile.setRotation(getRotation());
-            projectile.move(25);
-        }
-        if(Greenfoot.mousePressed(null) && weaponButton.weaponUpgrade == 2){
-            Projectile projectile = new Projectile();
-            getWorld().addObject(projectile, getX(), getY());
-            projectile.setRotation(getRotation() - 10);
-            projectile.move(20);
-             Projectile projectile2 = new Projectile();
-            getWorld().addObject(projectile2, getX(), getY());
-            projectile2.setRotation(getRotation() + 10);
-            projectile2.move(20);
-        }
-        if(Greenfoot.mousePressed(null) && weaponButton.weaponUpgrade == 3){
-            Projectile projectile = new Projectile();
-            getWorld().addObject(projectile, getX(), getY());
-            projectile.setRotation(getRotation() - 10);
-            projectile.move(20);
-            Projectile projectile2 = new Projectile();
-            getWorld().addObject(projectile2, getX(), getY());
-            projectile2.setRotation(getRotation() + 10);
-            projectile2.move(20);
-            Projectile projectile3 = new Projectile();
-            getWorld().addObject(projectile3, getX(), getY());
-            projectile3.setRotation(getRotation());
-            projectile3.move(20);
-        }
     }
 }

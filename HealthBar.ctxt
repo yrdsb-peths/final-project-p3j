@@ -5,7 +5,6 @@ comment1.params=e
 comment1.target=HealthBar(greenfoot.Actor)
 comment2.params=
 comment2.target=void\ act()
-comment2.text=\r\n\ Act\ is\ called\ whenever\ the\ 'Act'\ button\ gets\ pressed.\r\n\ or\ every\ tick\ whenever\ the\ 'Run'\ button\ gets\ pressed.\r\n
 comment3.params=n
 comment3.target=void\ setHealth(double)
 comment4.params=

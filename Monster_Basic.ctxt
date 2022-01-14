@@ -1,11 +1,11 @@
 #BlueJ class context
 comment0.target=Monster_Basic
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Monster_Basic\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ 1/11\ 0.2\r\n
-comment1.params=w
-comment1.target=Monster_Basic(greenfoot.World)
-comment2.params=
-comment2.target=void\ act()
-comment2.text=\r\n\ Act\ is\ called\ whenever\ the\ 'Act'\ button\ gets\ pressed.\r\n\ or\ every\ tick\ whenever\ the\ 'Run'\ button\ gets\ pressed.\r\n
+comment1.params=
+comment1.target=Monster_Basic()
+comment2.params=w
+comment2.target=void\ addedToWorld(greenfoot.World)
 comment3.params=
-comment3.target=boolean\ hitByProjectile()
+comment3.target=void\ act()
+comment3.text=\r\n\ Act\ is\ called\ whenever\ the\ 'Act'\ button\ gets\ pressed.\r\n\ or\ every\ tick\ whenever\ the\ 'Run'\ button\ gets\ pressed.\r\n
 numComments=4
