@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version 1/14 0.15
  */
-public class Projectile extends Actor{
+public class Projectile extends SmoothMover{
     private GreenfootImage img;
     private World world;
     private int dmg;

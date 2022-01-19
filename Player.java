@@ -6,7 +6,7 @@ import greenfoot.*;
  * @author Vincent Hsieh 
  * @version 1/14 0.55
  */
-public class Player extends Actor{
+public class Player extends SmoothMover{
     HealthBar healthbar;
     World world;
     

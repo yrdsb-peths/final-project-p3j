@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version 1/11 0.15
  */
-public class Enemy extends Actor{
+public class Enemy extends SmoothMover{
     public void act(){
     }
     public boolean hitByProjectile(){
