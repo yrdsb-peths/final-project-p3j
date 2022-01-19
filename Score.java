@@ -7,8 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version 1/11 0.15
  */
 public class Score extends Actor{
-    // this needs to be static
-    public static int score;
+    public static int score = 0;
     private Color transparent = new Color(0,0,0,0);
     public Score(){
         update();

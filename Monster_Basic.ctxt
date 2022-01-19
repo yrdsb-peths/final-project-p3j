@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Monster_Basic
-comment0.text=\n\ Write\ a\ description\ of\ class\ Monster_Basic\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ 1/14\ 0.4\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Monster_Basic\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ 1/14\ 0.4\r\n
 comment1.params=
 comment1.target=Monster_Basic()
 comment2.params=w

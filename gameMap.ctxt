@@ -1,12 +1,10 @@
 #BlueJ class context
 comment0.target=gameMap
-comment0.text=\n\ Write\ a\ description\ of\ class\ GameWorld\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ 1/14\ 0.5\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ GameWorld\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ 1/14\ 0.5\r\n
 comment1.params=
 comment1.target=gameMap()
 comment2.params=
-comment2.target=Player\ getPlayer()
-comment3.params=
-comment3.target=void\ act()
-comment4.params=
-comment4.target=void\ mob_spawn()
-numComments=5
+comment2.target=void\ act()
+comment3.params=n
+comment3.target=void\ mob_spawn(int)
+numComments=4

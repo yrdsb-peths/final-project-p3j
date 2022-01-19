@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version 1/11 0.15
  */
 public class Money extends Actor{
-    public static int money;
+    public static int money = 0;
     private Color transparent = new Color(0,0,0,0);
     public Money(){
         update();
