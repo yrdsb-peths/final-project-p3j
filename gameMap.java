@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class GameWorld here.
  * 
@@ -7,38 +7,47 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version 1/14 0.5
  */
 public class gameMap extends World{
-    /**
-     * Constructor for objects of class GameWorld.
-     * 
-     */
-    public Player player;
-    Score scoreCounter = new Score();
-    WeaponButton weaponButton = new WeaponButton();
-    Money cash = new Money();
-    public gameMap(){    
+    //           reqirement_for_next_level wave_size
+    int[][]diffculty_table={{20,              10},  //lvl0 (default)
+                            {60,              20},  //lvl1
+                            {150,             30},  //lvl2
+                            {0,               50}}; //lvl3 (final)
+    int cur_lvl = 0;
+    
+    Player player;
+    Score scoreCounter;
+    WeaponButton weaponButton;
+    Money cash;
+    public gameMap(){   
         super(900, 600, 1); 
         player = new Player();
+        scoreCounter = new Score();
+        cash = new Money();
+        weaponButton = new WeaponButton();
+        
         addObject(player, getWidth()/2, getHeight()/2);
         addObject(scoreCounter, 100, 30);
         addObject(cash, 800, 30);
         addObject(weaponButton, 800, 100);
     }
-    public Player getPlayer(){
-        return player;
-    }
-    
     public void act(){
-        if (Greenfoot.isKeyDown("e")){
-            recursive_mod_spawn(Integer.parseInt(Greenfoot.ask("how many")));
+        if(getObjects(Player.class).size()>0){
+            if(cur_lvl < diffculty_table.length - 1){
+                if(Score.score >= diffculty_table[cur_lvl][0]){
+                    cur_lvl++;
+                }
+            }
+            //spawn mob when theres no more mob
+            if(getObjects(Enemy.class).size()<=0){
+                mob_spawn(diffculty_table[cur_lvl][1]);
+            }
         }
     }
-    public void recursive_mod_spawn(int times){
-        //why the hell am i doing this garbage, this can be done in a goddanm
-        //for loop, yet we going reursive for it, bruh
-        if(times<=0) return;
-        Monster_Basic mob = new Monster_Basic();
-        addObject(mob, Greenfoot.getRandomNumber(900), Greenfoot.getRandomNumber(600));
-        
-        recursive_mod_spawn(times-1);
+    
+    public void mob_spawn(int n){
+        for(int i = 0; i < n; i++){
+            Monster_Basic mob = new Monster_Basic();
+            addObject(mob, Greenfoot.getRandomNumber(900), Greenfoot.getRandomNumber(600));
+        }
     }
 }

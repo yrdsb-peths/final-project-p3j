@@ -10,6 +10,7 @@ public class Monster_Basic extends Enemy{
     int health = 3;
     int score = 1;
     int reward = 5;
+    double spd = 1;
     
     Player player;
     HealthBar healthbar;
@@ -38,18 +39,14 @@ public class Monster_Basic extends Enemy{
                     player.hurt(1);
                 }
             }
-            
-            // also it seems that the turnToward is not very accurate, wonder if there is a way to make it accurate
             turnTowards(player.getX(), player.getY());
             update();
-            move(1);
+            move(spd);
         }
         cur_CD -= (double)fire_timer.millisElapsed()/1000;
         fire_timer.mark();
-        
         if(hitByProjectile()){
             Projectile p = (Projectile)getOneIntersectingObject(Projectile.class);
-            
             health -= p.getDMG();
             healthbar.setHealth((double)health/3);
             world.removeObject(p);
