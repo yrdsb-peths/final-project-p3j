@@ -28,17 +28,18 @@ public class gameMap extends World{
     }
     
     public void act(){
-        if (Greenfoot.isKeyDown("e")){
-            recursive_mod_spawn(Integer.parseInt(Greenfoot.ask("how many")));
-        }
+        //if (Greenfoot.isKeyDown("e")){
+            mob_spawn(0);
+        //}
     }
-    public void recursive_mod_spawn(int times){
+    public void mob_spawn(int scoreCounter){
         //why the hell am i doing this garbage, this can be done in a goddanm
         //for loop, yet we going reursive for it, bruh
-        if(times<=0) return;
+        int i;
         Monster_Basic mob = new Monster_Basic();
-        addObject(mob, Greenfoot.getRandomNumber(900), Greenfoot.getRandomNumber(600));
-        
-        recursive_mod_spawn(times-1);
+        for(i = 0; i < scoreCounter; i++)
+        {
+            addObject(mob, Greenfoot.getRandomNumber(900), Greenfoot.getRandomNumber(600));
+        }
     }
 }
