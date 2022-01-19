@@ -13,6 +13,7 @@ public class Player extends Actor{
     private SimpleTimer fire_timer = new SimpleTimer();
     private double fire_CD = 0.1;
     private double cur_CD = 0;
+    private double health = 20;
     public Player(){
         setImage("trainer(initial).png"); // The initial sprite of the character
     }
@@ -34,13 +35,42 @@ public class Player extends Actor{
         }
         cur_CD -= (double)fire_timer.millisElapsed()/1000;
         fire_timer.mark();
+        
+        if(health<=0){
+            Score.score=0;
+            Money.money=0;
+            
+            //FailScreen map = new FailScreen();
+            //Greenfoot.setWorld(map);
+            remove();
+        }
     }
+    public void remove(){
+        world.removeObject(healthbar);
+        world.removeObject(this);
+    }
+    public void hurt(int dmg){
+        health -= dmg;
+        healthbar.setHealth((double)health/20);
+    }
+    public void hurt(double dmg){
+        health -= dmg;
+        healthbar.setHealth((double)health/20);
+    }
+    int last_mouse_X = 0;
+    int last_mouse_Y = 0;
     public void fireProjectile(){
         int initial_rot = (WeaponButton.weaponUpgrade-1)*5;
         for(int i=0; i<WeaponButton.weaponUpgrade; i++){
             Projectile projectile = new Projectile();
             world.addObject(projectile, getX(), getY());
-            projectile.turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());
+            // to deal with Mouse Out of Bound problem that causes a null pointer exception
+            if(Greenfoot.getMouseInfo()!=null){
+                last_mouse_X = Greenfoot.getMouseInfo().getX();
+                last_mouse_Y = Greenfoot.getMouseInfo().getY();
+            }
+            // also it seems that the turnToward is not very accurate, wonder if there is a way to make it accurate
+            projectile.turnTowards(last_mouse_X, last_mouse_Y);
             projectile.setRotation(projectile.getRotation() - initial_rot + (10*i));
             projectile.move(20);
         }

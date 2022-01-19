@@ -10,7 +10,7 @@ public class Enemy extends Actor{
     public void act(){
     }
     public boolean hitByProjectile(){
-        if(getOneIntersectingObject(Projectile.class) != null){
+        if(getOneIntersectingObject(Projectile.class)!=null){
             return true;
         }
         return false;
