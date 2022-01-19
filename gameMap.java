@@ -27,19 +27,20 @@ public class gameMap extends World{
         return player;
     }
     
-    public void act(){
-        //if (Greenfoot.isKeyDown("e")){
-            mob_spawn(0);
-        //}
+    public void act()
+    {  
+        mob_spawn();
     }
-    public void mob_spawn(int scoreCounter){
+    public void mob_spawn(){
         //why the hell am i doing this garbage, this can be done in a goddanm
         //for loop, yet we going reursive for it, bruh
         int i;
         Monster_Basic mob = new Monster_Basic();
-        for(i = 0; i < scoreCounter; i++)
+        for(i = 0; i < Greenfoot.getRandomNumber(10); i++)
         {
             addObject(mob, Greenfoot.getRandomNumber(900), Greenfoot.getRandomNumber(600));
+            
         }
+        
     }
 }
