@@ -42,6 +42,14 @@ public class gameMap extends World{
                 mob_spawn(diffculty_table[cur_lvl][1]);
             }
         }
+        {
+            //Start game if space bar is pressed
+            if ("g".equals(Greenfoot.getKey())){
+                gameOver gameWorld = new gameOver();
+                //change worlds
+                Greenfoot.setWorld(gameWorld);
+            }
+        }
     }
     
     public void mob_spawn(int n){
