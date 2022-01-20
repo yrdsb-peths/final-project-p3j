@@ -16,6 +16,7 @@ public class WeaponButton extends Actor{
             if(Greenfoot.mousePressed(this) && Money.money >= 150){
                 Money.money -= 150;
                 weaponUpgrade++;
+                Greenfoot.playSound("FX299.mp3");
             }
         }else{
             //weaponUpgrade=3;

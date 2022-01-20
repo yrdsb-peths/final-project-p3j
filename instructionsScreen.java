@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class instructionsScreen extends World
 {
     Label titleLabel2 = new Label("How to Play?:", 70);
-    Label atkLabel = new Label ("Aim with the Mouse, and Shoot with Left-Click", 50);
+    Label atkLabel = new Label ("Aim with the Mouse, and Shoot with Space", 50);
     Label moveLabel = new Label("To move, use arrow keys or w a s d", 55);
     Label startLabel2 = new Label("Press Enter to Start", 50);
     /**

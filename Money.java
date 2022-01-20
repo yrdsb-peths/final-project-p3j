@@ -16,6 +16,14 @@ public class Money extends Actor{
         update();
     }
     public void update(){
-        setImage(new GreenfootImage("$"+money,40,Color.BLACK,transparent));  
+         
+        if(money < 150)
+        {
+            setImage(new GreenfootImage("$"+money,40,Color.BLACK,transparent)); 
+        }
+        else
+        {
+            setImage(new GreenfootImage("$"+money,40,Color.GREEN,transparent)); 
+        }
     }      
 }
