@@ -20,6 +20,7 @@ public class gameMap extends World{
     Money cash;
     public gameMap(){   
         super(900, 600, 1); 
+        setBackground("map.png");
         player = new Player();
         scoreCounter = new Score();
         cash = new Money();

@@ -10,6 +10,7 @@ public class Projectile extends SmoothMover{
     private GreenfootImage img;
     private World world;
     private int dmg;
+    
     public Projectile(){
         update();
         dmg = 1;
@@ -36,5 +37,6 @@ public class Projectile extends SmoothMover{
         img.setColor(Color.RED);
         img.fillRect(0,0,10,2);
         setImage(img);
+        Greenfoot.playSound("projectileSound.wav");
     }      
 }
