@@ -1,12 +1,10 @@
 #BlueJ class context
 comment0.target=Player
-comment0.text=\r\n\ A\ class\ for\ the\ user's\ character\ that\ they\ will\ control\ in\ the\ overworld\r\n\ \r\n\ @author\ Vincent\ Hsieh\ \r\n\ @version\ 1/14\ 0.55\r\n
+comment0.text=\r\n\ A\ class\ for\ the\ user's\ character\ that\ they\ will\ control\ in\ the\ overworld\r\n\ \r\n\ @author\ Vincent\ Hsieh\ \r\n\ @version\ 1/14\ 0.6\r\n
 comment1.params=
 comment1.target=Player()
-comment10.params=v\ min\ max
-comment10.target=int\ clamp(int,\ int,\ int)
-comment11.params=direction
-comment11.target=void\ SetAnimation(java.lang.String)
+comment10.params=direction
+comment10.target=void\ SetAnimation(java.lang.String)
 comment2.params=w
 comment2.target=void\ addedToWorld(greenfoot.World)
 comment3.params=
@@ -23,4 +21,4 @@ comment8.params=
 comment8.target=void\ MovementControl()
 comment9.params=x\ y
 comment9.target=void\ Move(int,\ int)
-numComments=12
+numComments=11

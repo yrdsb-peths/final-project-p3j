@@ -6,34 +6,29 @@ import java.util.ArrayList;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Utilities  
-{
+public class Util{
     // instance variables - replace the example below with your own
-    public static void swap(int[] arr, int i, int j)
-    {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+    public static void swap(ArrayList arr, int i, int j){
+        Object t = arr.get(i);
+        arr.set(i,arr.get(j));
+        arr.set(j,t);
     }
-    public static void shuffle(int[] arr)
-    {
+    /*
+    public static void shuffle(int[] arr){
         int n = arr.length;
-
-        for(int i = 0; i < n; i++)
-        {
+        for(int i = 0; i < n; i++){
             int r = Greenfoot.getRandomNumber(n - i) + i;
-            Utilities.swap(arr, i, r);
+            swap(arr, i, r);
         }
     }
-    public static void setup(int[] arr)
-    {
+    public static void setup(int[] arr){
         int n = arr.length;
-        for(int i = 1; i <= n; i++)
-        {
+        for(int i = 1; i <= n; i++){
             arr[i - 1] = i;
         }
-    }    
     }
+    */
+}
    
 
 

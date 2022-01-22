@@ -4,7 +4,7 @@ import greenfoot.*;
  * A class for the user's character that they will control in the overworld
  * 
  * @author Vincent Hsieh 
- * @version 1/14 0.55
+ * @version 1/14 0.6
  */
 public class Player extends SmoothMover{
     HealthBar healthbar;
@@ -37,11 +37,6 @@ public class Player extends SmoothMover{
         fire_timer.mark();
         
         if(health<=0){
-            Score.score=0;
-            Money.money=0;
-            
-            //FailScreen map = new FailScreen();
-            //Greenfoot.setWorld(map);
             remove();
         }
     }
@@ -64,14 +59,16 @@ public class Player extends SmoothMover{
         for(int i=0; i<WeaponButton.weaponUpgrade; i++){
             Projectile projectile = new Projectile();
             world.addObject(projectile, getX(), getY());
-            // to deal with Mouse Out of Bound problem that causes a null pointer exception
+            //to deal with Mouse Out of Bound problem that causes a null pointer exception
             if(Greenfoot.getMouseInfo()!=null){
                 last_mouse_X = Greenfoot.getMouseInfo().getX();
                 last_mouse_Y = Greenfoot.getMouseInfo().getY();
             }
-            // also it seems that the turnToward is not very accurate, wonder if there is a way to make it accurate
+            //turn projectile Toward the last valid mouse position
             projectile.turnTowards(last_mouse_X, last_mouse_Y);
+            //apply addtional rotation
             projectile.setRotation(projectile.getRotation() - initial_rot + (10*i));
+            //move it a bit
             projectile.move(20);
         }
     }
@@ -91,70 +88,21 @@ public class Player extends SmoothMover{
         int x=0,y=0; // movement variables
         int step_size=3;
         
-        // Booleans for storing collision with ImpassableBox
-        boolean upper_hit=false,lower_hit=false,left_hit=false,right_hit=false;
-        for(int junk = 0; junk<step_size; junk++){ 
-            if(up)y-=1; // if moving up
-            if(down)y+=1; // if moving down
-            if(left)x-=1; // if moving left
-            if(right)x+=1; // if moving right
+        if(up)y-=step_size; // if moving up
+        if(down)y+=step_size; // if moving down
+        if(left)x-=step_size; // if moving left
+        if(right)x+=step_size; // if moving right
             
-            /* no ImpassableBox stuff yet
-            // Collision
-            List<ImpassableBox> object; // list storing colliding objects
-            for(int i = -img_x/2; i < img_x/2; i++){
-                if(!upper_hit){ // if colliding with object above player
-                    // put the object player is colliding with in list
-                    object = getObjectsAtOffset(x+i, y-img_y/2-1, ImpassableBox.class);
-                    // if there is an object in the list
-                    // set collision (upper) to true, block movement state "up"
-                    if(object.size()!=0)upper_hit=true;up=false;
-                }
-                if(!lower_hit){ // if colliding with object below player
-                    object = getObjectsAtOffset(x+i, y+img_y/2, ImpassableBox.class);
-                    // if there is an object in the list
-                    // set collision (lower) to true, block movement state "down"
-                    if(object.size()!=0)lower_hit=true;down=false;
-                }
-            }
-            for(int i = -img_y/2; i < img_y/2; i++){
-                if(!left_hit){ // if colliding with object to the left
-                    object = getObjectsAtOffset(x-img_x/2-1, y+i, ImpassableBox.class);
-                    // if there is an object in the list
-                    // set collision (left) to true, block movement state "left"
-                    if(object.size()!=0)left_hit=true;left=false;
-                }
-                if(!right_hit){ // if colliding with object to the right
-                    object = getObjectsAtOffset(x+img_x/2, y+i, ImpassableBox.class);
-                    // if there is an object in the list
-                    // set collision (right) to true, block movement state "right"
-                    if(object.size()!=0)right_hit=true;right=false;
-                }
-            }
-            */
-           
-            // if a collision state is true
-            // sets y (or x) movement so that the player cannot move in the
-            // same direction as the direction of collision w/ collision box(es). 
-            if(upper_hit){y=Math.max(0,y);}
-            if(lower_hit){y=Math.min(0,y);} 
-            if(left_hit){x=Math.max(0,x);} 
-            if(right_hit){x=Math.min(0,x);}
-        }
         //sets sprite based on movement state
-        if(x>0){setImage("trainer(right).png");}
-        else if(x<0){setImage("trainer(left).png");}
-        if(y>0){SetAnimation("down");}
-        else if(y<0){SetAnimation("up");} 
+        if(x>0)     setImage("trainer(right).png");
+        else if(x<0)setImage("trainer(left).png");
+        if(y>0)     SetAnimation("down");
+        else if(y<0)SetAnimation("up");
         Move(x,y);
     }
     // Movement method
     public void Move(int x, int y){
         setLocation(getX()+x, getY()+y);
-    }
-    //clamp value between min and max
-    public int clamp(int v,int min,int max){ //this is not even used my god
-        return Math.max(min,Math.min(max,v));
     }
     private static class Animation_Table{
         //               tot_frame  cur_frame

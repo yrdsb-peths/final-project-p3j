@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.target=ScoreSave
+comment0.text=\r\n\ Saves\ the\ Score\ and\ Names\ during\ one\ session\r\n\ \r\n\ @author\ Vincent\ Hsieh\r\n\ @version\ 1.0\r\n
+comment1.params=name\ score
+comment1.target=void\ add(java.lang.String,\ int)
+comment1.text=\r\n\ Add\ a\ record\ into\ the\ ScoreSave\ with\ the\ name\ and\ score\r\n
+comment2.params=n
+comment2.target=java.lang.String\ getName(int)
+comment2.text=\r\n\ Get\ the\ record\ name\ at\ this\ index\r\n
+comment3.params=n
+comment3.target=int\ getScore(int)
+comment3.text=\r\n\ Get\ the\ record\ score\ at\ this\ index\r\n
+comment4.params=
+comment4.target=void\ sort()
+comment4.text=\r\n\ triggers\ a\ sort\ to\ the\ ScoreSave\r\n
+comment5.params=nums\ l\ h
+comment5.target=void\ quicksort(java.util.ArrayList,\ int,\ int)
+comment6.params=nums\ l\ h
+comment6.target=int\ partition(java.util.ArrayList,\ int,\ int)
+numComments=7

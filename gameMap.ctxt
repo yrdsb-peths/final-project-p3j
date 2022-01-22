@@ -7,4 +7,5 @@ comment2.params=
 comment2.target=void\ act()
 comment3.params=n
 comment3.target=void\ mob_spawn(int)
+comment3.text=\r\n\ Spawn\ n\ mobs\ at\ random\ location\ of\ the\ world\r\n
 numComments=4
