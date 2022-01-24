@@ -7,62 +7,86 @@ import java.util.*;
  * @version 1/14 0.4
  */
 public class Monster_Basic extends Enemy{
-    int health = 3;
-    int score = 1;
-    int reward = 5;
-    double spd = 1;
+    //health of this enemy
+    private int health = 3;
+    //score worth of this enemy
+    private int score = 1;
+    //cash worth of this enemy
+    private int reward = 5;
+    //movement speed of this enemy
+    private double spd = 1;
+    //cooldown between attack of this enemy (seconds)
+    private double fire_CD = 1;
     
-    Player player;
-    HealthBar healthbar;
-    World world;
+    //current cooldown level for attacks, starts with 0
+    private double cur_CD = 0;
+    
+    //who the player is
+    private Player player;
+    //who my healthbar is
+    private HealthBar healthbar;
+    //what my world is
+    private World world;
+    //what my image is
     private GreenfootImage img;
+    
     public Monster_Basic(){
-        update();
+        update();//set our image
     }
     public void addedToWorld(World w){
-        //a World is pass down from this function addedToWorld
-        healthbar = new HealthBar(this);
-        world = w;
-        world.addObject(healthbar, 0, 0);
+        world = w;//a World is pass down from this function addedToWorld
+        healthbar = new HealthBar(this);//create a healthbar that follows me
+        world.addObject(healthbar,0,0);//add this healthbar into the world, it will fix its location itself
     }
+    //create a new timer object that will tracking our firing interval
     private SimpleTimer fire_timer = new SimpleTimer();
-    private double fire_CD = 1;
-    private double cur_CD = 0;
     public void act(){
-        //hunt player
-        List players = world.getObjects(Player.class);
-        if(players.size()>0){
-            player = (Player)players.get(0);
-            if(isTouching(Player.class)){
+        List players = world.getObjects(Player.class);//gets all the player in world, cause you cant get one it seems
+        if(players.size()>0){//if we have atleast 1 player
+            player = (Player)players.get(0);//gets the first player in da list
+            if(isTouching(Player.class)){//if we are touching ANY player
+                //is the cooldown ready
                 if(cur_CD <= 0){
-                    cur_CD = fire_CD;
-                    player.hurt(1);
+                    cur_CD = fire_CD;//reset cooldown
+                    player.hurt(1);//damage player
                 }
             }
-            turnTowards(player.getX(), player.getY());
-            update();
-            move(spd);
+            turnTowards(player.getX(), player.getY());//turnTowards player for sake os simplicity
+            update();//fix image orientation
+            move(spd);//walk toward player
         }
-        cur_CD -= (double)fire_timer.millisElapsed()/1000;
-        fire_timer.mark();
-        if(hitByProjectile()){
+        double dt = fire_timer.millisElapsed()/1000;//delta time
+        cur_CD = Math.max(cur_CD-dt,0);//math the current cooldown and limit it to be no less then 0
+        fire_timer.mark();//mark the timer for a new cooldown call
+        if(hitByProjectile()){//if hit by a projectile
+            //get one of the projectile that we get hit by
             Projectile p = (Projectile)getOneIntersectingObject(Projectile.class);
+            //decrease health based on projectile damage
             health -= p.getDMG();
+            //set our healthbar level
             healthbar.setHealth((double)health/3);
+            //delete this projectile
             world.removeObject(p);
         }
+        //if we have no more health
         if(health<=0){
-            Score.score+=score;
-            Money.money+=reward;
-            remove();
+            Score.score+=score;//increase scroe
+            Money.money+=reward;//increase money
+            remove();//remove ourself
         }
     }
+    /**Remove this entity along with its associated healthbar
+     */
     public void remove(){
-        world.removeObject(healthbar);
-        world.removeObject(this);
+        world.removeObject(healthbar);//remove the healthbar first
+        world.removeObject(this);//then remove us
     }
+    
+    /**Update the image
+     */
     private void update(){
         img = new GreenfootImage("monster_placeholder.png");
+        //so the image is always upright no matter what direction the actor is
         img.rotate(-getRotation());
         setImage(img);
     }      

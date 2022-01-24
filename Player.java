@@ -55,6 +55,11 @@ public class Player extends SmoothMover{
     int last_mouse_X = 0;
     int last_mouse_Y = 0;
     public void fireProjectile(){
+        GreenfootSound pew = new GreenfootSound("projectileSound.wav");//create our pew sound
+        pew.setVolume(55);//so we dont make ourself deaf
+        pew.playLoop();//play pew sound repeatedly in a loop
+        pew.play();//for only one loop (yes i abuse the system)
+        
         int initial_rot = (WeaponButton.weaponUpgrade-1)*5;
         for(int i=0; i<WeaponButton.weaponUpgrade; i++){
             Projectile projectile = new Projectile();

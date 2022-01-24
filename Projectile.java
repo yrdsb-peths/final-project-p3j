@@ -10,7 +10,6 @@ public class Projectile extends SmoothMover{
     private GreenfootImage img;
     private World world;
     private int dmg;
-    GreenfootSound  pew = new GreenfootSound("projectileSound.wav"); // create a sound object
     
     public Projectile(){
         update();
@@ -38,7 +37,5 @@ public class Projectile extends SmoothMover{
         img.setColor(Color.RED);
         img.fillRect(0,0,10,2);
         setImage(img);
-        pew.setVolume(55);
-        pew.play();
     }      
 }
