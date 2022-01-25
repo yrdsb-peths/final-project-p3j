@@ -19,4 +19,9 @@ public class States extends Actor{
     public void act(){
         // Add your action code here.
     }
+    public static void reset(){
+        weaponUpgrade = 0;
+        money = 0;
+        score = 0;
+    }
 }

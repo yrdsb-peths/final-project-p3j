@@ -59,8 +59,7 @@ public class gameMap extends World{
                 ScoreSave.add(name, score);
                 //wipe the money and score because they are also stored
                 //as static varible, and we do want to wipe those
-                States.score=0;
-                States.money=0;
+                States.reset();
                 //Go to game over screen
                 Greenfoot.setWorld(new gameOver(name, score));
             }
