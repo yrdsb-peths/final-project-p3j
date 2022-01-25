@@ -22,7 +22,7 @@ public class startScreen extends World{
     }
     public void act(){
         //Start game if space bar is pressed
-        if ("enter".equals(Greenfoot.getKey())){
+        if("enter".equals(Greenfoot.getKey())){
             //change world
             Greenfoot.setWorld(new instructionsScreen());
         }

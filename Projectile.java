@@ -7,8 +7,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version 1/14 0.15
  */
 public class Projectile extends SmoothMover{
+    //projectile sprite
     private GreenfootImage img;
+    //world we are at
     private World world;
+    
+    //damage of this particular projectile
     private int dmg;
     
     public Projectile(){
@@ -34,7 +38,7 @@ public class Projectile extends SmoothMover{
     }    
     private void update(){
         img = new GreenfootImage(10, 2);
-        img.setColor(Color.RED);
+        img.setColor(Color.YELLOW);
         img.fillRect(0,0,10,2);
         setImage(img);
     }      

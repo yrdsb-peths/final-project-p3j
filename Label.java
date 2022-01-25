@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 
 /**
- * A Label class that allows you to display a textual value on screen.
+ * A Label class that allows you to display a textual value on screen. (modified)
  * 
  * The Label is an actor, so you will need to create it, and then add it to the world
  * in Greenfoot.  If you keep a reference to the Label then you can change the text it
@@ -17,8 +17,7 @@ public class Label extends Actor
     private int fontSize;
     private Color lineColor = Color.BLACK;
     private Color fillColor = Color.WHITE;
-    
-    private static final Color transparent = new Color(0,0,0,0);
+    private Color background = new Color(0,0,0,0);
 
     
     /**
@@ -73,6 +72,16 @@ public class Label extends Actor
     }
     
     /**
+     * Sets the background transparency of the text
+     * 
+     * @param transparent the transparency of the text
+     */
+    public void setBackgroundColor(Color background){
+        this.background = background;
+        updateImage();
+    }
+    
+    /**
      * Sets the fill color of the text
      * 
      * @param fillColor the fill color of the text
@@ -83,12 +92,11 @@ public class Label extends Actor
         updateImage();
     }
     
-
     /**
      * Update the image on screen to show the current value.
      */
     private void updateImage()
     {
-        setImage(new GreenfootImage(value, fontSize, fillColor, transparent, lineColor));
+        setImage(new GreenfootImage(value, fontSize, fillColor, background, lineColor));
     }
 }

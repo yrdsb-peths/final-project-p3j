@@ -7,9 +7,9 @@ import java.util.*;
  */
 public class ScoreSave{
     //a private static list of names
-    private static ArrayList names = new ArrayList();
+    private static ArrayList<String> names = new ArrayList();
     //a private static list of scores
-    private static ArrayList scores = new ArrayList();
+    private static ArrayList<Integer> scores = new ArrayList();
     /**
      * the ammount of records we have
      */
@@ -18,43 +18,53 @@ public class ScoreSave{
      * Add a record into the ScoreSave with the name and score
      */
     public static void add(String name, int score){
-        //add the name into the ordered list of names
-        names.add(name);
-        //add the score into the ordered list of scores
-        scores.add(score);
-        //increase the length by 1
-        length++;
+        //try find the name in the list of names we have
+        int res = namesLinSearch(name);
+        if(res != -1){
+            //find it, now set the score that is related to this name, if it is bigger
+            int saved_score = scores.get(res);
+            if(saved_score < score){
+                scores.set(res,score);
+            }
+        }else{
+            //add the name into the ordered list of names
+            names.add(name);
+            //add the score into the ordered list of scores
+            scores.add(score);
+            //increase the length by 1
+            length++;
+        }
     }
     /**
      * Get the record name at this index
      */
     public static String getName(int n){
-        return (String)names.get(n);
+        return names.get(n);
     }
     /**
      * Get the record score at this index
      */
     public static int getScore(int n){
-        return (int)scores.get(n);
+        return scores.get(n);
     }
     /**
      * triggers a sort to the ScoreSave
      */
     public static void sort(){
-        quicksort(scores, 0, scores.size() - 1);
+        scoresQuicksort(0, scores.size() - 1);
     }
-    private static void quicksort(ArrayList nums, int l, int h){
+    private static void scoresQuicksort(int l, int h){
         if (h <= l) return;
-        int j = partition(scores, l, h);
-        quicksort(scores, l, j-1); 
-        quicksort(scores, j+1, h);
+        int j = scoresPartition(l, h);
+        scoresQuicksort(l, j-1); 
+        scoresQuicksort(j+1, h);
     }
-    private static int partition(ArrayList nums, int l, int h){
+    private static int scoresPartition(int l, int h){
         int i = l; 
         int j = h + 1;
         while(true){
-            while((int)scores.get(++i)>(int)scores.get(l))if (i == h)break; 
-            while((int)scores.get(--j)<(int)scores.get(l))if (j == l)break;
+            while(scores.get(++i)>scores.get(l))if (i == h)break; 
+            while(scores.get(--j)<scores.get(l))if (j == l)break;
             if (i >= j)break;
             Util.swap(scores, i, j);
             Util.swap(names, i, j);
@@ -62,5 +72,13 @@ public class ScoreSave{
         Util.swap(scores, l, j);  // Swap partitioning element
         Util.swap(names, l, j);  // Swap partitioning element
         return j;  // Return index of item now know to be in place
+    }
+    private static int namesLinSearch(String target){
+        for(int i = 0; i < names.size(); i++){
+            if(((String)names.get(i)).equals(target)){
+                return i;
+            }
+        }
+        return -1;
     }
 }

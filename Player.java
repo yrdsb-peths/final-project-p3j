@@ -60,8 +60,8 @@ public class Player extends SmoothMover{
         pew.playLoop();//play pew sound repeatedly in a loop
         pew.play();//for only one loop (yes i abuse the system)
         
-        int initial_rot = (WeaponButton.weaponUpgrade-1)*5;
-        for(int i=0; i<WeaponButton.weaponUpgrade; i++){
+        int initial_rot = States.weaponUpgrade*5;
+        for(int i=0; i<=States.weaponUpgrade; i++){
             Projectile projectile = new Projectile();
             world.addObject(projectile, getX(), getY());
             //to deal with Mouse Out of Bound problem that causes a null pointer exception

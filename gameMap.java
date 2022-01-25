@@ -14,6 +14,7 @@ public class gameMap extends World{
                             {150,             30},  //lvl2
                             {0,               50}}; //lvl3 (final)
     public int cur_lvl = 0; //current diffculty lvl
+    public int wave_cnt = 0; //wave count
     public static GreenfootSound gameMusic = new GreenfootSound("Rip & Tear _ Doom OST.mp3");
     public gameMap(){
         super(900, 600, 1); //create world
@@ -21,13 +22,9 @@ public class gameMap extends World{
 
         //adds player in center of map
         addObject(new Player(), getWidth()/2, getHeight()/2);
-        //adds Score Counter in top left of map
-        addObject(new Score(), 100, 30);
-        //adds Money Display in top right of map
-        addObject(new Money(), 800, 30);
-        //adds Weapon upgrade Button in top right of map
-        addObject(new WeaponButton(), 800, 100);
         
+        //adds HUD
+        addObject(new HUD(), 0, 0);
     }
     public void act(){
         gameMusic.setVolume(15);
@@ -37,14 +34,16 @@ public class gameMap extends World{
             //If the current diffculty lvl is not the highest yet
             if(cur_lvl < diffculty_table.length - 1){
                 //If the diffculty level satisfy the requirement for next lvl
-                if(Score.score >= diffculty_table[cur_lvl][0]){
+                if(States.score >= diffculty_table[cur_lvl][0]){
                     cur_lvl++; //Increase diffculty level
                 }
             }
-            //spawn mob when theres no more mob
-            if(getObjects(Enemy.class).size()<=0){
+            
+            //spawn mob when theres no more mob, but exclude bosses
+            if(getObjects(Enemy.class).size() - getObjects(Monster_Boss.class).size() <= 0){
                 //Spawn the ammount of mob depending on the wave size
                 mob_spawn(diffculty_table[cur_lvl][1]);
+                wave_cnt++;
             }
         }else{
             /*if("g".equals(Greenfoot.getKey()))*/
@@ -53,15 +52,15 @@ public class gameMap extends World{
                 //feed it back into the game over screen so it can show
                 //the apporate message
                 String name = Greenfoot.ask("Name");
-                int score = Score.score;
+                int score = States.score;
                 //store the name and score for the current run
                 //this will works because the reset button doesnt wipe
                 //static varible, as long as the game didnt error
                 ScoreSave.add(name, score);
                 //wipe the money and score because they are also stored
                 //as static varible, and we do want to wipe those
-                Score.score=0;
-                Money.money=0;
+                States.score=0;
+                States.money=0;
                 //Go to game over screen
                 Greenfoot.setWorld(new gameOver(name, score));
             }
@@ -72,7 +71,17 @@ public class gameMap extends World{
      */
     public void mob_spawn(int n){
         for(int i = 0; i < n; i++){
-            addObject(new Monster_Basic(),Greenfoot.getRandomNumber(900),Greenfoot.getRandomNumber(600));
+            if(wave_cnt % 5 == 0 & i == 0 & wave_cnt >= 10){
+                //bose spawn for every 5 wave
+                addObject(new Monster_Boss(),Greenfoot.getRandomNumber(900),Greenfoot.getRandomNumber(600));
+            }else{
+                //Liklier to spawn a thicker monster as the wave count increases
+                if(Greenfoot.getRandomNumber(50) < Math.min(wave_cnt + 1,10)){
+                    addObject(new Monster_Thick(),Greenfoot.getRandomNumber(900),Greenfoot.getRandomNumber(600));
+                }else{
+                    addObject(new Monster_Basic(),Greenfoot.getRandomNumber(900),Greenfoot.getRandomNumber(600));
+                }
+            }
         }
     }
 }

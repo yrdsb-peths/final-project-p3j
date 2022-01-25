@@ -1,24 +1,24 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class Monster_Basic here.
+ * Write a description of class Monster_Thick here.
  * 
  * @author (your name) 
  * @version 1/14 0.4
  */
-public class Monster_Basic extends Enemy{
+public class Monster_Thick extends Enemy{
     //health of this enemy
-    private int health = 3;
+    private int health = 10;
     //score worth of this enemy
-    private int score = 1;
+    private int score = 3;
     //cash worth of this enemy
-    private int reward = 5;
+    private int reward = 15;
     //movement speed of this enemy
-    private double spd = 1;
+    private double spd = .8;
     //cooldown between attack of this enemy (seconds)
     private double fire_CD = 1;
     //damage towards player
-    private double player_dmg = 1;
+    private double player_dmg = 2;
     
     //current cooldown level for attacks, starts with 1 to avoid spawn kill
     private double cur_CD = 1;
@@ -39,7 +39,7 @@ public class Monster_Basic extends Enemy{
     //lower the animate speed for faster animation
     int animateSpeed = 2;
     int count;
-    public Monster_Basic(){
+    public Monster_Thick(){
         
     }
     public void addedToWorld(World w){
@@ -66,7 +66,7 @@ public class Monster_Basic extends Enemy{
         double dt = (double)fire_timer.millisElapsed()/1000;//delta time
         cur_CD = Math.max(cur_CD-dt,0);//math the current cooldown and limit it to be no less then 0
         fire_timer.mark();//mark the timer for a new cooldown call
-        if(hitByProjectile()){
+        if(hitByProjectile()){//if hit by a projectile
             //get one of the projectile that we get hit by
             Projectile p = (Projectile)getOneIntersectingObject(Projectile.class);
             //decrease health based on projectile damage
@@ -98,7 +98,7 @@ public class Monster_Basic extends Enemy{
             }
             setImage("skeleton-move_" + animateImage + ".png");
             animateImage++;
-            getImage().scale(50,50);
+            getImage().scale(70,70);
         }
     }
 }
