@@ -30,8 +30,13 @@ public class Monster_Basic extends Enemy{
     //what my image is
     private GreenfootImage img;
     
+    int animateImage = 0;
+    //lower the animate speed for faster animation
+    int animateSpeed = 1;
+    int count;
     public Monster_Basic(){
-        update();//set our image
+        
+        
     }
     public void addedToWorld(World w){
         world = w;//a World is pass down from this function addedToWorld
@@ -41,6 +46,7 @@ public class Monster_Basic extends Enemy{
     //create a new timer object that will tracking our firing interval
     private SimpleTimer fire_timer = new SimpleTimer();
     public void act(){
+        
         List players = world.getObjects(Player.class);//gets all the player in world, cause you cant get one it seems
         if(players.size()>0){//if we have atleast 1 player
             player = (Player)players.get(0);//gets the first player in da list
@@ -52,7 +58,7 @@ public class Monster_Basic extends Enemy{
                 }
             }
             turnTowards(player.getX(), player.getY());//turnTowards player for sake os simplicity
-            update();//fix image orientation
+            //update();//fix image orientation
             move(spd);//walk toward player
         }
         double dt = fire_timer.millisElapsed()/1000;//delta time
@@ -74,6 +80,7 @@ public class Monster_Basic extends Enemy{
             Money.money+=reward;//increase money
             remove();//remove ourself
         }
+        animate();
     }
     /**Remove this entity along with its associated healthbar
      */
@@ -81,13 +88,21 @@ public class Monster_Basic extends Enemy{
         world.removeObject(healthbar);//remove the healthbar first
         world.removeObject(this);//then remove us
     }
-    
-    /**Update the image
+    public void animate()
+    {
+        if(count % animateSpeed == 0)
+        {
+            if(animateImage > 16){
+                animateImage = 0;
+            }
+            setImage("skeleton-move_" + animateImage + ".png");
+            animateImage++;
+            update();
+        }
+    }
+    /**Update the imagews
      */
     private void update(){
-        img = new GreenfootImage("monster_placeholder.png");
-        //so the image is always upright no matter what direction the actor is
-        img.rotate(-getRotation());
-        setImage(img);
+        getImage().scale(70,70);
     }      
 }
