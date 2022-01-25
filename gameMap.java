@@ -14,6 +14,7 @@ public class gameMap extends World{
                             {150,             30},  //lvl2
                             {0,               50}}; //lvl3 (final)
     public int cur_lvl = 0; //current diffculty lvl
+    public static GreenfootSound gameMusic = new GreenfootSound("Rip & Tear _ Doom OST.mp3");
     public gameMap(){
         super(900, 600, 1); //create world
         setBackground("map.png"); //sets background
@@ -26,8 +27,11 @@ public class gameMap extends World{
         addObject(new Money(), 800, 30);
         //adds Weapon upgrade Button in top right of map
         addObject(new WeaponButton(), 800, 100);
+        
     }
     public void act(){
+        gameMusic.setVolume(15);
+        gameMusic.playLoop();
         //If theres any player in the map
         if(getObjects(Player.class).size()>0){
             //If the current diffculty lvl is not the highest yet
