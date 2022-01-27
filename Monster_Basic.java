@@ -37,7 +37,7 @@ public class Monster_Basic extends Enemy{
     
     int animateImage = 0;
     //lower the animate speed for faster animation
-    int animateSpeed = 2;
+    int animateSpeed = 50;
     int count;
     public Monster_Basic(){
         
@@ -84,7 +84,8 @@ public class Monster_Basic extends Enemy{
         }
         animate();
     }
-    /**Remove this entity along with its associated healthbar
+    /**
+     * Remove this entity along with its associated healthbar
      */
     public void remove(){
         world.removeObject(healthbar);//remove the healthbar first

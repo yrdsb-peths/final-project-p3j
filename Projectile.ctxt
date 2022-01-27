@@ -1,16 +1,20 @@
 #BlueJ class context
 comment0.target=Projectile
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Projectile\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ 1/14\ 0.15\r\n
+comment0.text=\r\n\ Projectile.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ 1/14\ 0.15\r\n
 comment1.params=
 comment1.target=Projectile()
+comment1.text=\r\n\ Normal\ projectile\ constructer\r\n
 comment2.params=d
 comment2.target=Projectile(int)
-comment3.params=
-comment3.target=int\ getDMG()
-comment4.params=w
-comment4.target=void\ addedToWorld(greenfoot.World)
+comment2.text=\r\n\ Projectile\ constructer\ with\ specified\ damage\r\n
+comment3.params=w
+comment3.target=void\ addedToWorld(greenfoot.World)
+comment4.params=
+comment4.target=void\ act()
 comment5.params=
-comment5.target=void\ act()
+comment5.target=int\ getDMG()
+comment5.text=\r\n\ get\ this\ Projectiles\ damage\r\n
 comment6.params=
 comment6.target=void\ update()
+comment6.text=\r\n\ update\ the\ projectile\ sprits\r\n
 numComments=7

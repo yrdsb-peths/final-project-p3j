@@ -26,8 +26,8 @@ public class Player extends SmoothMover{
     public void act(){
         MovementControl(); // Allows movement/controls movement
         
-        //still need to figure out a way to allow us to just hold the mouse
-        if(Greenfoot.mousePressed(null) || Greenfoot.isKeyDown("space")){
+        //is spacebar is helddown, we set the cooldown and dire the projectile
+        if(Greenfoot.isKeyDown("space")){
             if(cur_CD <= 0){
                 cur_CD = fire_CD;
                 fireProjectile();

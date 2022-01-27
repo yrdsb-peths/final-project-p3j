@@ -16,7 +16,12 @@ public class instructionsScreen extends World{
         super(900, 600, 1); 
         
         //sets background for instructions screen
-        setBackground("instructions.jpeg");
+        GreenfootImage img = new GreenfootImage("instructions.jpeg");
+        //semi-transparent box
+        img.setColor(new Color(0,0,0,100));
+        img.fillRect(40,40,820,520);
+        
+        setBackground(img);
         
         //adds labels for the screen
         addObject(new Label("How to Play?:", 70),                               getWidth()/2, getHeight()/6);

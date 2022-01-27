@@ -6,9 +6,8 @@ import java.util.*;
  * @version 1.0
  */
 public class ScoreSave{
-    //a private static list of names
+    //a private list of names and scores
     private static ArrayList<String> names = new ArrayList();
-    //a private static list of scores
     private static ArrayList<Integer> scores = new ArrayList();
     /**
      * the ammount of records we have
@@ -19,7 +18,7 @@ public class ScoreSave{
      */
     public static void add(String name, int score){
         //try find the name in the list of names we have
-        int res = namesLinSearch(name);
+        int res = linearSearch(names, name);
         if(res != -1){
             //find it, now set the score that is related to this name, if it is bigger
             int saved_score = scores.get(res);
@@ -31,7 +30,7 @@ public class ScoreSave{
             names.add(name);
             //add the score into the ordered list of scores
             scores.add(score);
-            //increase the length by 1
+            //increase the scores length by 1
             length++;
         }
     }
@@ -53,12 +52,19 @@ public class ScoreSave{
     public static void sort(){
         scoresQuicksort(0, scores.size() - 1);
     }
+    /**
+     * I HAVE NO IDEA HOW TO GENERALIZE IT DUE TO HOW IT IS SET UP
+     * but its quicksort, and then used for scores
+     */
     private static void scoresQuicksort(int l, int h){
         if (h <= l) return;
         int j = scoresPartition(l, h);
-        scoresQuicksort(l, j-1); 
+        scoresQuicksort(l, j-1);
         scoresQuicksort(j+1, h);
     }
+    /**
+     * Partition function used by scoresQuicksort
+     */
     private static int scoresPartition(int l, int h){
         int i = l; 
         int j = h + 1;
@@ -73,9 +79,15 @@ public class ScoreSave{
         Util.swap(names, l, j);  // Swap partitioning element
         return j;  // Return index of item now know to be in place
     }
-    private static int namesLinSearch(String target){
-        for(int i = 0; i < names.size(); i++){
-            if(((String)names.get(i)).equals(target)){
+    /**
+     * triditonal liner search, think it supports all object type
+     * @param  list   a list of objects
+     * @param  target   the object we are looking for
+     * @return     the index of this object, or -1 if not found 
+     */
+    private static int linearSearch(List list, Object target){
+        for(int i = 0; i < list.size(); i++){
+            if((list.get(i)).equals(target)){
                 return i;
             }
         }

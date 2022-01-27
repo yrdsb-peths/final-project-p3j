@@ -33,7 +33,7 @@ public class HealthBar extends Actor{
      */
     private void update_bar(){
         //if theres changes to the display health
-        if(last_health!=health){
+        if(last_health != health){
             //remember new value
             last_health = health;
             

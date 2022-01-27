@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Projectile here.
+ * Projectile.
  * 
  * @author (your name) 
  * @version 1/14 0.15
@@ -14,17 +14,19 @@ public class Projectile extends SmoothMover{
     
     //damage of this particular projectile
     private int dmg;
-    
+    /**
+     * Normal projectile constructer
+     */
     public Projectile(){
         update();
         dmg = 1;
     }
+    /**
+     * Projectile constructer with specified damage
+     */
     public Projectile(int d){
         update();
         dmg = d;
-    }
-    public int getDMG(){
-        return dmg;
     }
     public void addedToWorld(World w){
         //a World is pass down from this function addedToWorld
@@ -35,7 +37,16 @@ public class Projectile extends SmoothMover{
         if(isAtEdge()){
             world.removeObject(this);
         }
-    }    
+    }
+    /**
+     * get this Projectiles damage
+     */
+    public int getDMG(){
+        return dmg;
+    }
+    /**
+     * update the projectile sprits
+     */
     private void update(){
         img = new GreenfootImage(10, 2);
         img.setColor(Color.YELLOW);
