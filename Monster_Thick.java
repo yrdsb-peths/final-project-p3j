@@ -39,9 +39,6 @@ public class Monster_Thick extends Enemy{
     //lower the animate speed for faster animation
     int animateSpeed = 80;
     int count;
-    public Monster_Thick(){
-        
-    }
     public void addedToWorld(World w){
         world = w;//a World is pass down from this function addedToWorld
         healthbar = new HealthBar(this);//create a healthbar that follows me

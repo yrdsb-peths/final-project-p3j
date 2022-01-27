@@ -14,27 +14,28 @@ public class gameOver extends World{
         // Create a new world with 900x600 cells with a cell size of 1x1 pixels.
         super(900, 600, 1);
         
-        
-        //sets background for instructions screen
+        //background for instructions screen
         GreenfootImage img = new GreenfootImage("instructions.jpeg");
-        //white background
+        
+        //Darken background
         img.setColor(new Color(0,0,0,50));
         img.fillRect(0,0,900,600);
-        //semi-transparent box
+        
+        //Dark semi-transparent box
         img.setColor(new Color(0,0,0,150));
         img.fillRect(200,40,500,520);
+        
         setBackground(img);
 
-        //adds labels for the startscreen
+        //adds labels for the Score board
         addObject(new Label(name+"!",40), getWidth()/2, getHeight()/8);
         addObject(new Label("You have scored:",30), getWidth()/2, getHeight()/8+35);
         addObject(new Label(score+" points!",40), getWidth()/2, getHeight()/8+65);
         
         //triggers the sorting for the Score save, because we just
-        //added a new record before we come to this world
+        //added a new record before we came to this world
         ScoreSave.sort();
         
-
         //count from 0 to the ammount of records we have
         for(int i = 0; i < ScoreSave.length; i++){
             //assemble the score printout, and add it at its appropiate location

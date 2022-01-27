@@ -21,5 +21,5 @@ comment6.target=int\ scoresPartition(int,\ int)
 comment6.text=\r\n\ Partition\ function\ used\ by\ scoresQuicksort\r\n
 comment7.params=list\ target
 comment7.target=int\ linearSearch(java.util.List,\ java.lang.Object)
-comment7.text=\r\n\ triditonal\ liner\ search,\ think\ it\ supports\ all\ object\ type\r\n\ @param\ \ list\ \ \ a\ list\ of\ objects\r\n\ @param\ \ target\ \ \ the\ object\ we\ are\ looking\ for\r\n\ @return\ \ \ \ \ the\ index\ of\ this\ object,\ or\ -1\ if\ not\ found\ \r\n
+comment7.text=\r\n\ triditonal\ liner\ search,\ think\ it\ supports\ all\ object\ type\r\n\ @param\ \ list\ \ \ \ list\ of\ objects\r\n\ @param\ \ target\ \ the\ object\ we\ are\ looking\ for\r\n\ @return\ the\ index\ of\ this\ object,\ or\ -1\ if\ not\ found\ \r\n
 numComments=8

@@ -7,8 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version 1/11 0.15
  */
 public class Enemy extends SmoothMover{
-    public void act(){
-    }
+    //if Enemy is hit by a projectile
     public boolean hitByProjectile(){
         if(getOneIntersectingObject(Projectile.class)!=null){
             return true;

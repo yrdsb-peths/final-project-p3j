@@ -15,22 +15,23 @@ public class instructionsScreen extends World{
         // Create a new world with 900x600 cells with a cell size of 1x1 pixels.
         super(900, 600, 1); 
         
-        //sets background for instructions screen
+        //background for instructions screen
         GreenfootImage img = new GreenfootImage("instructions.jpeg");
-        //semi-transparent box
+        
+        //Dark semi-transparent box
         img.setColor(new Color(0,0,0,100));
         img.fillRect(40,40,820,520);
         
         setBackground(img);
         
         //adds labels for the screen
-        addObject(new Label("How to Play?:", 70),                               getWidth()/2, getHeight()/6);
-        addObject(new Label("To move, use arrow keys or WASD", 55),             getWidth()/2, getHeight()/3);
-        addObject(new Label("Aim with the Mouse, and Shoot with Space", 50),   getWidth()/2, getHeight()/2);
-        addObject(new Label("Press Enter to Start", 50),                        getWidth()/2, getHeight()/3*2);
+        addObject(new Label("How to Play?:", 70),                            getWidth()/2, getHeight()/6);
+        addObject(new Label("To move, use arrow keys or WASD", 55),          getWidth()/2, getHeight()/3);
+        addObject(new Label("Aim with the Mouse, and Shoot with Space", 50), getWidth()/2, getHeight()/2);
+        addObject(new Label("Press Enter to Start", 50),                     getWidth()/2, getHeight()/3*2);
     }
     public void act(){
-        //Start game if space bar is pressed
+        //Start game if enter is pressed
         if ("enter".equals(Greenfoot.getKey())){
             //change world
             Greenfoot.setWorld(new gameMap());

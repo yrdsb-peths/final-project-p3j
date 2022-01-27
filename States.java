@@ -31,8 +31,6 @@ public class States extends Actor{
     public States(){
         reset();
     }
-    public void act(){
-    }
     /**
      * Wipe the money, score, upgrades
      */

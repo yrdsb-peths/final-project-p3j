@@ -17,36 +17,28 @@ public class HUD extends Actor{
     private GreenfootImage money;
     private GreenfootImage score;
     
+    //GreenfootImage for HUD
     private GreenfootImage img;
-    public HUD(){
-    }
     public void addedToWorld(World w){
-        world = w;//a World is pass down from this function addedToWorld
-        
-        //make a empty HUD image
+        //a World is pass down from this function addedToWorld
+        world = w;
+                
+        //a empty HUD image
         img = new GreenfootImage(world.getWidth(),world.getHeight());
-        
-        //set weaponButton visuals
-        weaponButton = new GreenfootImage("Weapon\nUpgrade", 25, Color.BLACK, new Color(180,180,180,75));
-        //set money visuals 
-        money = new GreenfootImage("$" + States.money,40,Color.BLACK,bg);
-        //set score visuals
-        score = new GreenfootImage("Score: " + States.score,40,Color.BLACK,bg);
-        
-        update();
     }
     public void act(){
         //We need this mouse down function for beautiful button
         mouseDownAct();
         
-        //set money visuals 
+        //build money visuals 
         money = new GreenfootImage("$" + States.money, 40, Color.WHITE, bg, Color.BLACK);
         money.drawRect(0,0,money.getWidth()-1,money.getHeight()-1);
-        //set score visuals
+        
+        //build score visuals
         score = new GreenfootImage("Score: " + States.score, 40, Color.WHITE, bg, Color.BLACK);
         score.drawRect(0,0,score.getWidth()-1,score.getHeight()-1);
         
-        //weaponButton visual logic
+        //weaponButton logic
         //Allows upgrade when the level is below 4 (so they can gets to 4)
         if(States.weaponUpgrade < 4){
             if(States.money >= States.weaponUpgradePrice[States.weaponUpgrade]){
@@ -81,12 +73,14 @@ public class HUD extends Actor{
     public void update(){
         //make sure HUD is empty
         img.clear();
-        
+                
         //draw a semi transparent box on top of HUD
-        img.setColor(new Color(0,0,0));
-        img.drawRect(0,0,img.getWidth()-1,60);
         img.setColor(new Color(0,0,0,50));
         img.fillRect(0,0,img.getWidth(),60);
+        
+        //draw bordered box on top of HUD
+        img.setColor(new Color(0,0,0));
+        img.drawRect(0,0,img.getWidth()-1,60);
         
         //adds Score Counter in top left of HUD
         img.drawImage(score, 100 - score.getWidth()/2, 30 - score.getHeight()/2);
@@ -95,7 +89,6 @@ public class HUD extends Actor{
         //adds Weapon upgrade Button in top right of HUD
         img.drawImage(weaponButton, 750 - weaponButton.getWidth()/2, 30 - weaponButton.getHeight()/2);
         
-        //set it
         setImage(img);
         //just making sure we are at the right place
         setLocation(world.getWidth()/2, world.getHeight()/2);
@@ -118,11 +111,14 @@ public class HUD extends Actor{
         }
         return false;
     }
+    //boolean to keep track of if mouse is held down
     private boolean mouseDown = false;
     private void mouseDownAct(){
         if(Greenfoot.mousePressed(null)){
+            //mouse have just changed to down
             mouseDown = true;
         }else if(Greenfoot.mouseClicked(null)){
+            //mouse have lifted up
             mouseDown = false;
         }
     }

@@ -14,9 +14,12 @@ public class gameMap extends World{
                             {150,             30},  //lvl2
                             {300,             50},  //lvl3
                             {0,               80}}; //lvl4 (final)
-    public int cur_lvl = 0; //current diffculty lvl
-    public int wave_cnt = 0; //wave count
-    public static GreenfootSound gameMusic = new GreenfootSound("Rip & Tear _ Doom OST.mp3");
+    //current diffculty level
+    public int cur_lvl = 0;
+    //current wave count
+    public int wave_cnt = 0;
+    //Loads EXCITING game music
+    private GreenfootSound gameMusic = new GreenfootSound("Rip & Tear _ Doom OST.mp3");
     public gameMap(){
         super(900, 600, 1); //create world
         setBackground("map.png"); //sets background
@@ -24,10 +27,11 @@ public class gameMap extends World{
         //adds player in center of map
         addObject(new Player(), getWidth()/2, getHeight()/2);
         
-        //adds HUD
+        //adds HUD, HUD can fix its own location so adds them to (0,0) will do
         addObject(new HUD(), 0, 0);
     }
     public void act(){
+        //Plays EXCITING game music
         gameMusic.setVolume(15);
         gameMusic.playLoop();
         
@@ -48,23 +52,25 @@ public class gameMap extends World{
                 wave_cnt++;
             }
         }else{
-            /*if("g".equals(Greenfoot.getKey()))*/
-            {
-                gameMusic.stop();
-                //Temporarely store the Name and Score for this run to
-                //feed it back into the game over screen so it can show
-                //the apporate message
-                String name = Greenfoot.ask("Name");
-                int score = States.score;
-                //store the name and score, this will works because 
-                //the reset button doesnt wipe static varible
-                ScoreSave.add(name, score);
-                //wipe the States because they are also stored
-                //as static varible, and we do want to wipe those
-                States.reset();
-                //Go to game over screen
-                Greenfoot.setWorld(new gameOver(name, score));
-            }
+            //the player is dead
+            //no more music
+            gameMusic.stop();
+            
+            //Store the Name and Score for this run to feed it back into
+            //the game over screen so it can show the apporate message
+            String name = Greenfoot.ask("Name");
+            int score = States.score;
+            
+            //store the name and score, this will works because 
+            //the reset button doesnt wipe static varible
+            ScoreSave.add(name, score);
+            
+            //wipe the States because they are also stored
+            //as static varible, and we do want to wipe those
+            States.reset();
+            
+            //Go to game over screen
+            Greenfoot.setWorld(new gameOver(name, score));
         }
     }
     /**

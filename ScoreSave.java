@@ -81,9 +81,9 @@ public class ScoreSave{
     }
     /**
      * triditonal liner search, think it supports all object type
-     * @param  list   a list of objects
-     * @param  target   the object we are looking for
-     * @return     the index of this object, or -1 if not found 
+     * @param  list    list of objects
+     * @param  target  the object we are looking for
+     * @return the index of this object, or -1 if not found 
      */
     private static int linearSearch(List list, Object target){
         for(int i = 0; i < list.size(); i++){

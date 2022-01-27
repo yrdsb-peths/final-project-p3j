@@ -33,7 +33,10 @@ public class Projectile extends SmoothMover{
         world = w;
     }
     public void act(){
+        //fly
         move(10);
+        
+        //hit the edge of the world? remove ourseff then
         if(isAtEdge()){
             world.removeObject(this);
         }

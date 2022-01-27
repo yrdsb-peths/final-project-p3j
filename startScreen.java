@@ -13,7 +13,8 @@ public class startScreen extends World{
      */
     public startScreen(){    
         super(900, 600, 1);
-        //sets background for instructions screen
+        
+        //background for instructions screen
         GreenfootImage img = new GreenfootImage("startImage.jpeg");
         
         //semi-transparent box
@@ -22,15 +23,18 @@ public class startScreen extends World{
         
         setBackground(img); 
         
-        Greenfoot.start();    
+        //starts the game
+        Greenfoot.start();
+        
         //adds labels for the startscreen
         addObject(new Label("Monster Shooter", 100),        getWidth()/2, getHeight()/3);
         addObject(new Label("Press Enter to Start", 50),    getWidth()/2, getHeight()/3*2);
 
+        //reset the states so we can have a clean game
         States.reset();
     }
     public void act(){
-        //Start game if space bar is pressed
+        //Start game if enter is pressed
         if("enter".equals(Greenfoot.getKey())){
             //change world
             Greenfoot.setWorld(new instructionsScreen());

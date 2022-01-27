@@ -47,16 +47,20 @@ public class HealthBar extends Actor{
             h_bar.setColor(health_color);
             //draw colored bar with the correct length
             h_bar.fillRect(1,1,(int)Math.round(health*50.0),10);
+            
             //image is ready, now set our actor to this
             setImage(h_bar);
         }
+        //figure out where the health bar should be placed at
         int x = entity.getX();
         int y = entity.getY()-35;
+        
         //prevent health bar from capped at the top and clipping into the entity
         if(y<=0){
             //then we just move it below the entity
             y = entity.getY()+entity.getImage().getHeight()-10;
         }
+        
         //update location
         setLocation(x, y);
     }
